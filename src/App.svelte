@@ -1,5 +1,5 @@
 <script>
-	import {weather, getWeatherOnLocation} from "./store/store";
+	import {weather, getWeatherOnLocation, resetWeather} from "./store/store";
 	import Weather from "./components/Weather/Weather.svelte";
 
 	export let name;
@@ -10,6 +10,8 @@
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 
 	<Weather />
+
+	<button on:click={ () => resetWeather()}>See Weather</button>
 </main>
 
 <style>

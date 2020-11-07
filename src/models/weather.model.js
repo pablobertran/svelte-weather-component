@@ -49,7 +49,7 @@ export class WeatherModel {
         return this._temperature;
     }
 
-    setTemperature(params = {temp, feelsLike, humidity, pressure, tempMax, tempMin}) {
+    setTemperature(params = {temp: 0, feelsLike: 0, humidity: 0, pressure: 0, tempMax: 0, tempMin: 0}) {
         this._temperature = {
             temp: params.temp,
             feelsLike: params.feelsLike,

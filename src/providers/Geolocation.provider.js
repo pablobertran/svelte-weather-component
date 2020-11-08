@@ -1,3 +1,5 @@
+import {GeolocationModel} from "../models/geolocation.model";
+
 export class GeolocationProvider {
 
     _location;
@@ -20,15 +22,17 @@ export class GeolocationProvider {
     getLocation() {
         return new Promise((resolve, reject) => {
             const getPosition = (position) => {
-                resolve({
+                resolve(new GeolocationModel({
                     lat: position.coords.latitude,
                     lon: position.coords.longitude,
                     location: this._location
-                });
+                }));
             }
             if(navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(getPosition);
             }
         });
     }
+
+
 }

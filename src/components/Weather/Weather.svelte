@@ -1,16 +1,11 @@
 <script>
-    import {weather} from "../../store/store";
+    import {weather, geolocation} from "../../store/store";
     import {createEventDispatcher} from 'svelte';
 
     const dispatcher = createEventDispatcher();
     const refreshWeather = () => {
         dispatcher('weatherRefresh', true);
     }
-
-    let weatherObj;
-    weather.subscribe( w => {
-        weatherObj = w;
-    })
 
     const weatherStatuses = [
         {
@@ -206,18 +201,18 @@
     <div class="weather__wrapper__settings"></div>
     <div class="weather__wrapper__weather">
       <div class="weather__wrapper__weather-column">
-        <span class="weather__wrapper__weather-title">Barcelona</span>
-        <span class="weather__wrapper__weather-date">27th, November 2020</span>
+        <span class="weather__wrapper__weather-title">{$geolocation.getLocation()}</span>
+        <span class="weather__wrapper__weather-date">{$weather.getDate()}</span>
         <span class="weather__wrapper__weather-details">
           <span style="color: yellow">
             <i class="fas fa-sun"></i>
           </span>
-          Cloudy
+          {$weather.getDescription()}
         </span>
       </div>
       <div class="weather__wrapper__weather-column">
-        <div class="weather__wrapper__weather-temperature">20.0</div>
-        <div class="weather__wrapper__weather-min-max">15.3° / 22.1°</div>
+        <div class="weather__wrapper__weather-temperature">{$weather.getTemperature('temp')}</div>
+        <div class="weather__wrapper__weather-min-max">{$weather.getTemperature('tempMin')}° / {$weather.getTemperature('tempMax')}°</div>
       </div>
     </div>
   </div>

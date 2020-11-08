@@ -15,24 +15,29 @@ export class WeatherModel {
     _date = new Date();
 
 
-    constructor(params= {}) {
-        this.setDescription(params.description);
-        this.setWind(params.wind);
+    constructor(params = null) {
+        this._initialize(params);
+    }
+
+    _initialize(params) {
+        this.setDescription(!!params ? params.description : '');
+        this.setWind(!!params ? params.wind : {deg: 0, speed: 0});
         this.setTemperature({
-            temp: params.temperature.temp,
-            feelsLike: params.temperature.feels_like,
-            humidity: params.temperature.humidity,
-            pressure: params.temperature.pressure,
-            tempMax: params.temperature.temp_max,
-            tempMin: params.temperature.temp_min
+            temp: !!params ? params.temperature.temp : 0,
+            feelsLike: !!params ? params.temperature.feels_like : 0,
+            humidity: !!params ? params.temperature.humidity : 0,
+            pressure: !!params ? params.temperature.pressure : 0,
+            tempMax: !!params ? params.temperature.temp_max : 0,
+            tempMin: !!params ? params.temperature.temp_min : 0
         });
+        this.setDate(!!params ? params.date : null);
     }
 
     getWind() {
         return this._wind;
     }
 
-    setWind(params = {deg: 0, speed: 0} ) {
+    setWind(params = {deg: 0, speed: 0}) {
         this._wind.deg = params.deg;
         this._wind.speed = params.speed;
     }
@@ -66,6 +71,6 @@ export class WeatherModel {
     }
 
     getDate() {
-        return this._date;
+        return this.date;
     }
 }

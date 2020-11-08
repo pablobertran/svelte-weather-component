@@ -14,7 +14,8 @@ export class WeatherProvider extends APIProvider {
 
   async getWeather() {
     const geolocation = await this._geolocationProvider.getLocation();
-    const url = this._getURL(geolocation.location, geolocation.lat, geolocation.lon);
+    const coords = geolocation.getCoords();
+    const url = this._getURL(geolocation.getLocation(), coords.lat, coords.lon);
     const rawResponse = await fetch(url.href, {
       method: 'GET',
       headers: {
@@ -28,10 +29,12 @@ export class WeatherProvider extends APIProvider {
   }
 
   _getWeatherFromResponse(response) {
+    this._geolocationProvider.setLocation(response.name);
     return new WeatherModel({
       wind: response.wind,
       description: response.weather[0].description,
       temperature: response.main,
+      date: new Date(response.dt)
     });
   }
 }

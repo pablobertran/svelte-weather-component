@@ -2,8 +2,6 @@ import {settings} from "../config/settings";
 import {APIProvider} from "./API.provider";
 
 export class ForecastProvider extends APIProvider {
-    _forecast = [];
-
     _geolocationProvider
 
     constructor(geolocationProvider) {
@@ -14,7 +12,8 @@ export class ForecastProvider extends APIProvider {
 
     async getForecast() {
         const geolocation = await this._geolocationProvider.getLocation();
-        const url = this._getURL(geolocation.location, geolocation.lat, geolocation.lon);
+        const coords = geolocation.getCoords();
+        const url = this._getURL(geolocation.getLocation(), coords.lat, coords.lon);
         const rawResponse = await fetch(url.href, {
             method: 'GET',
             headers: {

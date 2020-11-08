@@ -12,6 +12,7 @@ export class WeatherModel {
         tempMax: 0,
         tempMin: 0
     }
+    _date = new Date();
 
 
     constructor(params= {}) {
@@ -58,5 +59,13 @@ export class WeatherModel {
             tempMax: params.tempMax,
             tempMin: params.tempMin
         }
+    }
+
+    setDate(date = new Date()) {
+        this._date = date;
+    }
+
+    getDate() {
+        return this._date;
     }
 }

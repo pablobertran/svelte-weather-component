@@ -1,6 +1,7 @@
 import {settings} from '../config/settings';
 import {WeatherModel} from "../models/weather.model";
 import {APIProvider} from "./API.provider";
+import moment from 'moment';
 
 export class WeatherProvider extends APIProvider {
 
@@ -34,7 +35,7 @@ export class WeatherProvider extends APIProvider {
       wind: response.wind,
       description: response.weather[0].description,
       temperature: response.main,
-      date: new Date(response.dt)
+      date: moment(response.dt * 1000)
     });
   }
 }

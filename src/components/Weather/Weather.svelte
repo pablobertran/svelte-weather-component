@@ -131,7 +131,8 @@
 
     .weather__wrapper__weather-details {
         text-align: left;
-        max-height: 50px
+        max-height: 50px;
+        text-transform: capitalize;
     }
 
     .weather__wrapper__weather-details span {
@@ -194,6 +195,7 @@
 
 <div class="weather__wrapper">
   <div class="weather__wrapper-background"></div>
+  <div class="weather__wrapper-spinner"></div>
   <div class="weather__wrapper-body">
     <div class="weather__wrapper__options-btn">
       <button on:click={refreshWeather}><i class="fas fa-search-location"></i></button>

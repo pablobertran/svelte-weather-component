@@ -1,3 +1,6 @@
+import moment from 'moment';
+import {settings} from "../config/settings";
+
 export class WeatherModel {
     _wind = {
         deg: 0,
@@ -30,7 +33,7 @@ export class WeatherModel {
             tempMax: !!params ? params.temperature.temp_max : 0,
             tempMin: !!params ? params.temperature.temp_min : 0
         });
-        this.setDate(!!params ? params.date : null);
+        this.setDate(!!params ? params.date : undefined);
     }
 
     getWind() {
@@ -66,11 +69,11 @@ export class WeatherModel {
         }
     }
 
-    setDate(date = new Date()) {
+    setDate(date = moment()) {
         this._date = date;
     }
 
     getDate() {
-        return this.date;
+        return this._date.format(settings.date.format);
     }
 }
